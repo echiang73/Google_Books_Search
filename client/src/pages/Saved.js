@@ -76,7 +76,7 @@ class Books extends Component {
               {this.state.books.map(book => {
                 return (
                   // <div style={{ borderTop: "1px solid black", borderLeft: "1px solid black", borderRight: "1px solid black",  }}>
-                  <ListItem key={book.id}>
+                  <ListItem key={book._id}>
                     <a rel="noreferrer noopener" target="_blank" href={book.link}>
                       <strong style={{ fontSize: "24px" }}>
                         {book.title}
