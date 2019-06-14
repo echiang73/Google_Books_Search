@@ -14,8 +14,8 @@ class Books extends Component {
   state = {
     books: [],
     title: "",
-    author: "",
-    synopsis: "",
+    authors: "",
+    description: "",
     search: "",
     results: []
   };
@@ -24,13 +24,13 @@ class Books extends Component {
     // this.loadBooks();
   }
 
-  loadBooks = () => {
-    API.getBooks()
-      .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-      )
-      .catch(err => console.log(err));
-  };
+  // loadBooks = () => {
+  //   API.getBooks()
+  //     .then(res =>
+  //       this.setState({ books: res.data, title: "", authors: "", synopsis: "" })
+  //     )
+  //     .catch(err => console.log(err));
+  // };
 
 
   deleteBook = id => {
@@ -61,7 +61,7 @@ class Books extends Component {
         this.setState({ results: res.data.items })
         // this.loadBooks()
         console.log(this.state.results);
-        console.log(this.state.results[0].id);
+        // console.log(this.state.results[0].id);
       })
       .catch(err => console.log(err))
     // })
@@ -70,10 +70,10 @@ class Books extends Component {
 
   // handleFormSubmit = event => {
   //   event.preventDefault();
-  //   if (this.state.title && this.state.author) {
+  //   if (this.state.title && this.state.authors) {
   //     API.saveBook({
   //       title: this.state.title,
-  //       author: this.state.author,
+  //       author: this.state.authors,
   //       synopsis: this.state.synopsis
   //     })
   //       .then(res => this.loadBooks())
@@ -114,21 +114,21 @@ class Books extends Component {
         <Col size="md-12 sm-12">
           <Wrapper>
             {this.state.results.length ? (
-
               <List>
                 {this.state.results.map(book => {
                   return (
                     // <div style={{ borderTop: "1px solid black", borderLeft: "1px solid black", borderRight: "1px solid black",  }}>
                     <ListItem key={book.id}>
-                      <a rel="noreferrer noopener" target="_blank" href="#">
+                      <a rel="noreferrer noopener" target="_blank" href={book.volumeInfo.infoLink}>
                         <strong style={{ fontSize: "24px" }}>
                           {book.volumeInfo.title}
                         </strong>
                       </a>
                       <br />
-                      by {book.volumeInfo.authors}
+                      by {(book.volumeInfo.authors).join(", ")}
                       <SaveBtn onClick={() => this.saveBook(book._id)} />
-                      <ViewBtn onClick={() => this.viewBook(book._id)} />
+                      <a rel="noreferrer noopener" target="_blank" href={book.volumeInfo.previewLink}>
+                      <ViewBtn /></a>
                       <hr />
                       <Row>
                         <Col size="xs-1 sm-1">
@@ -138,14 +138,12 @@ class Books extends Component {
                           {book.volumeInfo.description}
                         </Col>
                       </Row>
-                      
                     </ListItem>
                     // </div>
                   );
                 }
                 )}
               </List>
-
             ) : (
                 <h3>No Results to Display</h3>
               )}

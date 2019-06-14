@@ -17,7 +17,7 @@
 }
 
 .list-overflow-container li * {
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .list-overflow-container li a {

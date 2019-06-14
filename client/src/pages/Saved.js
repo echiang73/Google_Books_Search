@@ -12,8 +12,10 @@ class Books extends Component {
   state = {
     books: [],
     title: "",
-    author: "",
-    synopsis: ""
+    authors: "",
+    description: "",
+    search: "",
+    results: []
   };
 
   componentDidMount() {
@@ -23,7 +25,7 @@ class Books extends Component {
   loadBooks = () => {
     API.getBooks()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ books: res.data, title: "", authors: "", description: "" })
       )
       .catch(err => console.log(err));
   };
@@ -43,11 +45,11 @@ class Books extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.title && this.state.author) {
+    if (this.state.title && this.state.authors) {
       API.saveBook({
         title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
+        author: this.state.authors,
+        synopsis: this.state.description
       })
         .then(res => this.loadBooks())
         .catch(err => console.log(err));
@@ -74,15 +76,16 @@ class Books extends Component {
                 return (
                   // <div style={{ borderTop: "1px solid black", borderLeft: "1px solid black", borderRight: "1px solid black",  }}>
                   <ListItem key={book.id}>
-                    <a rel="noreferrer noopener" target="_blank" href="#">
+                    <a rel="noreferrer noopener" target="_blank" href={book.infoLink}>
                       <strong style={{ fontSize: "24px" }}>
                         {book.title}
                       </strong>
                     </a>
                     <br />
-                    by {book.authors}
+                    by {(book.authors).join(", ")}
                     <DeleteBtn onClick={() => this.deleteBook(book._id)} />
-                    <ViewBtn onClick={() => this.viewBook(book._id)} />
+                    <a rel="noreferrer noopener" target="_blank" href={book.previewLink}>
+                      <ViewBtn /></a>
                     <hr />
                     <Row>
                       <Col size="xs-1 sm-1">
