@@ -16,12 +16,6 @@ class Books extends Component {
     results: [],
     books: [],
     id: "",
-    // title: "",
-    // authors: "",
-    // description: "",
-    // link: "",
-    // previewLink: "",
-    // thumbnail: ""
   };
 
   componentDidMount() {
@@ -31,7 +25,7 @@ class Books extends Component {
   // loadBooks = () => {
   //   API.getBooks()
   //     .then(res =>
-  //       this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+  //       this.setState({ books: res.data, title: "", authors: "", description: "" })
   //     )
   //     .catch(err => console.log(err));
   // };
@@ -46,7 +40,6 @@ class Books extends Component {
           books: book
         });
       })
-        // this.loadBooks())
       .catch(err => console.log(err));
   };
 
