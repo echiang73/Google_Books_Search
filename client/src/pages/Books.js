@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SaveBtn from "../components/SaveBtn";
-import DeleteBtn from "../components/DeleteBtn";
+import ViewBtn from "../components/ViewBtn";
 import Jumbotron from "../components/Jumbotron";
 import Wrapper from "../components/Wrapper";
 import API from "../utils/API";
@@ -127,8 +127,8 @@ class Books extends Component {
                       </a>
                       <br />
                       by {book.volumeInfo.authors}
-                      <DeleteBtn onClick={() => this.deleteBook(book._id)} />
                       <SaveBtn onClick={() => this.saveBook(book._id)} />
+                      <ViewBtn onClick={() => this.viewBook(book._id)} />
                       <hr />
                       <Row>
                         <Col size="xs-1 sm-1">

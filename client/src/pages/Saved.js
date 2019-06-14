@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import DeleteBtn from "../components/DeleteBtn";
+import ViewBtn from "../components/ViewBtn";
 import Jumbotron from "../components/Jumbotron";
 import Wrapper from "../components/Wrapper";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
-import { Col, Container } from "../components/Grid";
+import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 
 class Books extends Component {
@@ -69,17 +70,34 @@ class Books extends Component {
           <Wrapper>
             {this.state.books.length ? (
               <List>
-                {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
+              {this.state.books.map(book => {
+                return (
+                  // <div style={{ borderTop: "1px solid black", borderLeft: "1px solid black", borderRight: "1px solid black",  }}>
+                  <ListItem key={book.id}>
+                    <a rel="noreferrer noopener" target="_blank" href="#">
+                      <strong style={{ fontSize: "24px" }}>
+                        {book.title}
                       </strong>
-                    </Link>
+                    </a>
+                    <br />
+                    by {book.authors}
                     <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+                    <ViewBtn onClick={() => this.viewBook(book._id)} />
+                    <hr />
+                    <Row>
+                      <Col size="xs-1 sm-1">
+                        {/* <Thumbnail src={book.volumeInfo.imageLinks.thumbnail} /> */}
+                      </Col>
+                      <Col size="xs-11 sm-11">
+                        {book.description}
+                      </Col>
+                    </Row>
                   </ListItem>
-                ))}
-              </List>
+                  // </div>
+                );
+              }
+              )}
+            </List>
             ) : (
                 <h3>No Results to Display</h3>
               )}
