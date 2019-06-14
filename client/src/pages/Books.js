@@ -37,8 +37,9 @@ class Books extends Component {
   // };
 
   saveBook = book => {
-    console.log("Saving book");
-    console.log(book);
+    // console.log("Saving book");
+    // console.log(book);
+    alert(book.title + " saved!");
     API.saveBook(book)
       .then(res => {
         this.setState({
