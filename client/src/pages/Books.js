@@ -16,12 +16,12 @@ class Books extends Component {
     results: [],
     books: [],
     id: "",
-    title: "",
-    authors: "",
-    description: "",
-    link: "",
-    previewLink: "",
-    thumbnail: ""
+    // title: "",
+    // authors: "",
+    // description: "",
+    // link: "",
+    // previewLink: "",
+    // thumbnail: ""
   };
 
   componentDidMount() {
@@ -36,11 +36,16 @@ class Books extends Component {
   //     .catch(err => console.log(err));
   // };
 
-  saveBook = id => {
+  saveBook = book => {
     console.log("Saving book");
-    console.log(this.state.title);
-    API.saveBook(id)
-      .then(res => this.loadBooks())
+    console.log(book);
+    API.saveBook(book)
+      .then(res => {
+        this.setState({
+          books: book
+        });
+      })
+        // this.loadBooks())
       .catch(err => console.log(err));
   };
 
@@ -71,23 +76,6 @@ class Books extends Component {
     // })
     // }
   };
-
-  // handleSave = id => {
-  //   console.log("Saving book");
-  //   console.log(this.state.title);
-  //   // event.preventDefault();
-  //     API.saveBook({
-  //       id: this.state.id,
-  //       title: this.state.volumeInfo.title,
-  //       authors: this.state.volumeInfo.authors,
-  //       description: this.state.volumeInfo.description,
-  //       link: this.state.volumeInfo.infoLink,
-  //       previewLink: this.state.volumeInfo.previewLink,
-  //       thumbnail: this.state.volumeInfo.imageLinks.thumbnail
-  //     })
-  //       .then(res => this.loadBooks())
-  //       .catch(err => console.log(err));
-  // };
 
   render() {
     return (
@@ -131,7 +119,16 @@ class Books extends Component {
                       </a>
                       <br />
                       by {(book.volumeInfo.authors).join(", ")}
-                      <SaveBtn onClick={() => this.saveBook(book._id)} />
+                      {/* <SaveBtn onClick={() => this.saveBook(book._id)} /> */}
+                      <SaveBtn onClick={() => this.saveBook({
+                        title: book.volumeInfo.title,
+                        authors: book.volumeInfo.authors[0],
+                        description: book.volumeInfo.description,
+                        thumbnail: book.volumeInfo.imageLinks.thumbnail,
+                        link: book.volumeInfo.infoLink,
+                        previewLink: book.volumeInfo.previewLink,
+                        _id: book.id
+                      })} />
                       <a rel="noreferrer noopener" target="_blank" href={book.volumeInfo.previewLink}>
                       <ViewBtn /></a>
                       <hr />
