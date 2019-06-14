@@ -4,7 +4,7 @@ import ViewBtn from "../components/ViewBtn";
 import Jumbotron from "../components/Jumbotron";
 import Wrapper from "../components/Wrapper";
 import API from "../utils/API";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 
@@ -82,7 +82,8 @@ class Books extends Component {
                       </strong>
                     </a>
                     <br />
-                    by {(book.authors).join(", ")}
+                    by {book.authors}
+                    {/* by {(book.authors).join(", ")} */}
                     <DeleteBtn onClick={() => this.deleteBook(book._id)} />
                     <a rel="noreferrer noopener" target="_blank" href={book.previewLink}>
                       <ViewBtn /></a>

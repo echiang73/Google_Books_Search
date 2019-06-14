@@ -12,12 +12,16 @@ import { Input, FormBtn } from "../components/Form";
 
 class Books extends Component {
   state = {
+    search: "",
+    results: [],
     books: [],
+    id: "",
     title: "",
     authors: "",
     description: "",
-    search: "",
-    results: []
+    link: "",
+    previewLink: "",
+    thumbnail: ""
   };
 
   componentDidMount() {
@@ -27,33 +31,33 @@ class Books extends Component {
   // loadBooks = () => {
   //   API.getBooks()
   //     .then(res =>
-  //       this.setState({ books: res.data, title: "", authors: "", synopsis: "" })
+  //       this.setState({ books: res.data, title: "", author: "", synopsis: "" })
   //     )
   //     .catch(err => console.log(err));
   // };
 
-
-  deleteBook = id => {
-    API.deleteBook(id)
+  saveBook = id => {
+    console.log("Saving book");
+    console.log(this.state.title);
+    API.saveBook(id)
       .then(res => this.loadBooks())
       .catch(err => console.log(err));
   };
 
-  // handleInputChange = event => {
-  //   const { name, value } = event.target;
-  //   this.setState({
-  //     [name]: value
-  //   });
+  // deleteBook = id => {
+  //   API.deleteBook(id)
+  //     .then(res => this.loadBooks())
+  //     .catch(err => console.log(err));
   // };
 
   handleInputChange = event => {
-    console.log("Clicked key!");
+    console.log("Key clicked!");
     this.setState({ search: event.target.value });
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
-    console.log("Clicked!");
+    console.log("Form submitted!");
     // if (this.state.search) {
     API.searchBooks(this.state.search)
       .then(res => {
@@ -68,17 +72,21 @@ class Books extends Component {
     // }
   };
 
-  // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   if (this.state.title && this.state.authors) {
+  // handleSave = id => {
+  //   console.log("Saving book");
+  //   console.log(this.state.title);
+  //   // event.preventDefault();
   //     API.saveBook({
-  //       title: this.state.title,
-  //       author: this.state.authors,
-  //       synopsis: this.state.synopsis
+  //       id: this.state.id,
+  //       title: this.state.volumeInfo.title,
+  //       authors: this.state.volumeInfo.authors,
+  //       description: this.state.volumeInfo.description,
+  //       link: this.state.volumeInfo.infoLink,
+  //       previewLink: this.state.volumeInfo.previewLink,
+  //       thumbnail: this.state.volumeInfo.imageLinks.thumbnail
   //     })
   //       .then(res => this.loadBooks())
   //       .catch(err => console.log(err));
-  //   }
   // };
 
   render() {
@@ -107,9 +115,7 @@ class Books extends Component {
                 </FormBtn>
             </form>
           </Wrapper>
-
         </Col>
-
 
         <Col size="md-12 sm-12">
           <Wrapper>
@@ -117,7 +123,6 @@ class Books extends Component {
               <List>
                 {this.state.results.map(book => {
                   return (
-                    // <div style={{ borderTop: "1px solid black", borderLeft: "1px solid black", borderRight: "1px solid black",  }}>
                     <ListItem key={book.id}>
                       <a rel="noreferrer noopener" target="_blank" href={book.volumeInfo.infoLink}>
                         <strong style={{ fontSize: "24px" }}>
@@ -139,7 +144,6 @@ class Books extends Component {
                         </Col>
                       </Row>
                     </ListItem>
-                    // </div>
                   );
                 }
                 )}
@@ -147,10 +151,8 @@ class Books extends Component {
             ) : (
                 <h3>No Results to Display</h3>
               )}
-
           </Wrapper>
         </Col>
-
       </Container>
     );
   }
@@ -158,29 +160,3 @@ class Books extends Component {
 
 export default Books;
 
-
-//  <a rel="noreferrer noopener" target="_blank" href={href}>
-//                     <Link to={"/books/" + book._id}>
-//                       <strong>
-//                         {book.title} by {book.author}
-//                       </strong>
-//                     </Link>
-//                     </a>
-//                     <DeleteBtn onClick={() => this.deleteBook(book._id)} />
-//                     <SaveBtn onClick={() => this.saveBook(book._id)} />
-//                   </ListItem>
-
-
-// <List>
-//                 {this.state.books.map(book => {
-//                   return (
-//                   <ListItem 
-//                     key={book._id}
-//                     title={book.title}
-//                     // href={book.href}
-//                     synopsis={book.synopsis}
-//                     // thumbnail={book.thumbnail}
-//                     />
-//                 );}
-//                 )}
-//               </List>
