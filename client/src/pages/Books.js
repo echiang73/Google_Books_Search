@@ -9,6 +9,7 @@ import Thumbnail from "../components/Thumbnail";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
+// import "./style.css";
 
 class Books extends Component {
   state = {
@@ -73,6 +74,7 @@ class Books extends Component {
 
   render() {
     return (
+      <div className="container1">
       <Container fluid>
 
         <Col size="md-12">
@@ -145,6 +147,7 @@ class Books extends Component {
           </Wrapper>
         </Col>
       </Container>
+      </div>
     );
   }
 }
