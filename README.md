@@ -1,4 +1,4 @@
-# React.js Google Books Search API
+# React.js Google Books Search API :book::mag:
 
 This React-based Google Books Search app allows you search for books by keywords (authors, title, etc) and return the results from the Google Books API. The list of book results provides pertainent information and will allow you click on a link to view the Google Books website for that specific book, click on View button to view a sample preview of that book, as well as click on the can Save button to save the book to review or purchase later (in the saved books page).
 
@@ -7,7 +7,7 @@ This application utilizes a combination of technologies, called a stack, to buil
 
 The app is deployed live on Heroku using mLabDB, but you can clone or download the code from GitHub to run the server codes on your localhost. In the terminal command, just make sure you change the directory to the root folder and first run `npm install` to load the required node modules from the package.json, then sure your MongoDB is running by typing in `mongod`, and finally type `npm start` to run React on localhost:3000.
 
-## Built with or topics covered
+## Built with or topics covered :gear:
 * HTML5
 * CSS3
 * JavaScript
