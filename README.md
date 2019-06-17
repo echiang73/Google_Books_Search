@@ -43,4 +43,4 @@ https://github.com/echiang73/Google_Books_Search
 
 ## Here is the preview of the web application:
 
-![](src/assets/images/webpreview.gif "gif")
+![](client/src/assets/images/webpreview.gif "gif")
