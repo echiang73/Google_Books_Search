@@ -17,6 +17,7 @@ class Books extends Component {
     results: [],
     books: [],
     id: "",
+    disabled: false
   };
 
   componentDidMount() {
@@ -73,6 +74,8 @@ class Books extends Component {
   };
 
   render() {
+    // {const submitDisabled = this.state.search !== this.state.search}
+    // const disabled = this.state.disabled ? 'disabled' : ''
     return (
       <div className="container1">
       <Container fluid>
@@ -115,16 +118,21 @@ class Books extends Component {
                       </a>
                       <br />
                       by {(book.volumeInfo.authors).join(", ")}
-                      {/* <SaveBtn onClick={() => this.saveBook(book._id)} /> */}
-                      <SaveBtn onClick={() => this.saveBook({
+                      {/* {const submitDisabled = this.state.search !== this.state.search} */}
+                      {/* <button disabled={submitDisabled}>hello</button> */}
+                      {/* <button {disabled}>Test-button</button> */}
+                      <SaveBtn 
+                      onClick={() => this.saveBook({
                         title: book.volumeInfo.title,
-                        authors: book.volumeInfo.authors[0],
+                        authors: (book.volumeInfo.authors).join(", "),
                         description: book.volumeInfo.description,
                         thumbnail: book.volumeInfo.imageLinks.thumbnail,
                         link: book.volumeInfo.infoLink,
                         previewLink: book.volumeInfo.previewLink,
                         _id: book.id
-                      })} />
+                      })}
+                      // onChange={this.state.disabled= true}
+                      />
                       <a rel="noreferrer noopener" target="_blank" href={book.volumeInfo.previewLink}>
                       <ViewBtn /></a>
                       <hr />
